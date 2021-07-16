@@ -545,6 +545,9 @@
     NSData *data = [NSJSONSerialization dataWithJSONObject:ext options:NSJSONWritingPrettyPrinted error:nil];
     pushInfo.ext = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     pushInfo.AndroidOPPOChannelID = @"tuikit";
+    if ([self.extDelegate respondsToSelector:@selector(ext_willSendMessage:)]) {
+        [self.extDelegate ext_willSendMessage:imMsg];
+    }
     [[V2TIMManager sharedInstance] sendMessage:imMsg
                                       receiver:self.conversationData.userID
                                        groupID:self.conversationData.groupID

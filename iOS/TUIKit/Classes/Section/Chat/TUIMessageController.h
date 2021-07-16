@@ -117,6 +117,13 @@ typedef NS_ENUM(NSInteger, TUIMultiResultOption) {
  */
 @end
 
+@protocol TMessageControllerExtDelegate <NSObject>
+
+@optional
+- (void)ext_willSendMessage:(V2TIMMessage *)msg;
+
+@end
+
 /////////////////////////////////////////////////////////////////////////////////
 //
 //                         TUIMessageController
@@ -131,6 +138,8 @@ typedef NS_ENUM(NSInteger, TUIMultiResultOption) {
  */
 @interface TUIMessageController : UITableViewController
 
+/// 扩展一个自定义代理 --by vince
+@property (nonatomic, weak) id<TMessageControllerExtDelegate> extDelegate;
 /**
  *  执行 TMessageControllerDelegate 协议的委托
  */
